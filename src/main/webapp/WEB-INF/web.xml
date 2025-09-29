@@ -11,4 +11,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.xhtml</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>EmployeeApiServlet</servlet-name>
+    <servlet-class>com.project.control.EmployeeApiServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>EmployeeApiServlet</servlet-name>
+    <url-pattern>/api/employees/*</url-pattern>
+</servlet-mapping>
+
 </web-app>

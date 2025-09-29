@@ -1,13 +1,11 @@
 package com.project.model;
 
-import java.sql.Date;
 
 public class Employee {
 	
 	private int id;
 	private String name, department;
 	private double salary;
-	private Date dob, jdate;
 	
 	
 	public Employee() {
@@ -16,14 +14,12 @@ public class Employee {
 	}
 
 
-	public Employee(int id, String name, String department, double salary, Date dob, Date jdate) {
+	public Employee(int id, String name, String department, double salary) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.department = department;
 		this.salary = salary;
-		this.dob = dob;
-		this.jdate = jdate;
 	}
 
 
@@ -67,30 +63,9 @@ public class Employee {
 	}
 
 
-	public Date getDob() {
-		return dob;
-	}
-
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-
-	public Date getJdate() {
-		return jdate;
-	}
-
-
-	public void setJdate(Date jdate) {
-		this.jdate = jdate;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", department=" + department + ", salary=" + salary + ", dob="
-				+ dob + ", jdate=" + jdate + "]";
+		return "Employee [id=" + id + ", name=" + name + ", department=" + department + ", salary=" + salary + "]";
 	}
-	
+
 }

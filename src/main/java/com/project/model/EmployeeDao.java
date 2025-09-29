@@ -1,76 +1,97 @@
 package com.project.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDao {
-	
-	String url = "jdbc:mysql://localhost:3306/roshan_jdbc", user = "root", pass = "root", q;
-	Connection con = null;
-	PreparedStatement ps = null;
-	ResultSet rs;
-	
-	public EmployeeDao() throws ClassNotFoundException, SQLException {
-		
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, user, pass);
-	}
-	
-	public boolean insertEmployee(Employee e) throws SQLException {
-		String q = "insert into Employee values(?, ?, ?, ?, ?, ?)";
-		ps = con.prepareStatement(q);
+    private final String url = "jdbc:mysql://localhost:3306/roshan_verto";
+    private final String user = "root";
+    private final String pass = "root";
 
-		ps.setInt(1, e.getId());
-		ps.setString(2, e.getName());
-		ps.setString(3, e.getDepartment());
-		ps.setDouble(4, e.getSalary());
-		ps.setDate(5, e.getDob());
-		ps.setDate(6, e.getJdate());
-		
-		int rows = ps.executeUpdate();
+    public EmployeeDao() throws ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+    }
 
-		if (rows > 0)
-			return true;
-		else
-			return false;
-	}
-	
-	public ResultSet searchEmployee(int i) throws SQLException {
-		String q = "select * from employee where id = ?";
-		ps = con.prepareStatement(q);
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, user, pass);
+    }
 
-		ps.setInt(1, i);
+    public boolean insertEmployee(Employee e) throws SQLException {
+        String q = "INSERT INTO employee (id, name, department, salary) VALUES (?, ?, ?, ?)";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(q)) {
 
-		rs = ps.executeQuery();
-		
-		return rs;
-	}
-	
-	public ResultSet getAllEmployees() throws SQLException {
-		String q = "select * from employee";
-		ps = con.prepareStatement(q);
-		
-		rs = ps.executeQuery();
-		
-		return rs;
-	}
-	
-	public boolean deleteEmployee(int i) throws SQLException {
-		String q = "delete from employee where id = ?";
-		ps = con.prepareStatement(q);
+            ps.setInt(1, e.getId());
+            ps.setString(2, e.getName());
+            ps.setString(3, e.getDepartment());
+            ps.setDouble(4, e.getSalary());
 
-		ps.setInt(1, i);
+            int rows = ps.executeUpdate();
+            System.out.println("Inserted rows: " + rows);
+            return rows > 0;
+        }
+    }
 
-		int rows = ps.executeUpdate();
+    public Employee searchEmployee(int id) throws SQLException {
+        String q = "SELECT id, name, department, salary FROM employee WHERE id = ?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(q)) {
 
-		if (rows > 0)
-			return true;
-		else
-			return false;
-	}
-	
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Employee e = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("department"), rs.getDouble("salary"));
+                    System.out.println("Found employee: " + e);
+                    return e;
+                }
+            }
+        }
+        System.out.println("Employee not found for ID: " + id);
+        return null;
+    }
 
+    public List<Employee> getAllEmployees() throws SQLException {
+        String q = "SELECT id, name, department, salary FROM employee";
+        List<Employee> list = new ArrayList<>();
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(q);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Employee e = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("department"), rs.getDouble("salary"));
+                list.add(e);
+            }
+        }
+        System.out.println("Total employees fetched: " + list.size());
+        return list;
+    }
+
+    public boolean updateEmployee(Employee e) throws SQLException {
+        String q = "UPDATE employee SET name=?, department=?, salary=? WHERE id=?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(q)) {
+
+            ps.setString(1, e.getName());
+            ps.setString(2, e.getDepartment());
+            ps.setDouble(3, e.getSalary());
+            ps.setInt(4, e.getId());
+
+            int rows = ps.executeUpdate();
+            System.out.println("Updated rows: " + rows);
+            return rows > 0;
+        }
+    }
+
+    public boolean deleteEmployee(int id) throws SQLException {
+        String q = "DELETE FROM employee WHERE id=?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(q)) {
+
+            ps.setInt(1, id);
+            int rows = ps.executeUpdate();
+            System.out.println("Deleted rows: " + rows);
+            return rows > 0;
+        }
+    }
 }
