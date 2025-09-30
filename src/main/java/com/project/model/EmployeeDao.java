@@ -1,6 +1,10 @@
 package com.project.model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +51,6 @@ public class EmployeeDao {
                 }
             }
         }
-        System.out.println("Employee not found for ID: " + id);
         return null;
     }
 
@@ -63,7 +66,6 @@ public class EmployeeDao {
                 list.add(e);
             }
         }
-        System.out.println("Total employees fetched: " + list.size());
         return list;
     }
 
@@ -78,7 +80,6 @@ public class EmployeeDao {
             ps.setInt(4, e.getId());
 
             int rows = ps.executeUpdate();
-            System.out.println("Updated rows: " + rows);
             return rows > 0;
         }
     }
@@ -90,7 +91,6 @@ public class EmployeeDao {
 
             ps.setInt(1, id);
             int rows = ps.executeUpdate();
-            System.out.println("Deleted rows: " + rows);
             return rows > 0;
         }
     }

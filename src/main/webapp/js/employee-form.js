@@ -1,5 +1,5 @@
 function saveEmployee(event) {
-    event.preventDefault(); // prevent form submit
+    event.preventDefault(); 
 
     const employee = {
     	id: parseInt(document.getElementById("id").value),

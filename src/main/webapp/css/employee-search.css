@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* Center content on the page */
+
 body {
     margin: 0;
     height: 100vh;
@@ -12,7 +12,6 @@ body {
     padding-top: 50px; 
 }
 
-/* Back link */
 a {
     text-decoration: none;
     color: #007BFF;
@@ -23,13 +22,11 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Page heading */
 h2 {
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Form styling */
 form {
     background: #fff;
     padding: 20px 30px;
@@ -63,7 +60,6 @@ form input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-/* Result table */
 table {
     border-collapse: collapse;
     width: 80%;

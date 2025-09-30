@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* Center content and basic page style */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -11,13 +10,11 @@ body {
     padding: 20px;
 }
 
-/* Page heading */
 h2 {
     color: #333;
     margin-bottom: 10px;
 }
 
-/* Back link */
 a {
     text-decoration: none;
     color: #007BFF;
@@ -28,7 +25,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Table style */
 table {
     border-collapse: collapse;
     width: 80%;
@@ -52,7 +48,6 @@ table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Modal overlay */
 #modalOverlay {
     display: none; 
     position: fixed;
@@ -62,7 +57,6 @@ table tr:hover {
     z-index: 999;
 }
 
-/* Edit modal box */
 #editModal {
     display: none;
     position: fixed;

@@ -1,5 +1,5 @@
 function searchEmployee(event) {
-    event.preventDefault(); // prevent form refresh
+    event.preventDefault();
 
     const id = document.getElementById("id").value;
 
@@ -14,7 +14,7 @@ function searchEmployee(event) {
             const table = document.getElementById("resultTable");
             const tbody = document.getElementById("resultBody");
 
-            tbody.innerHTML = ""; // clear old results
+            tbody.innerHTML = "";
             let row = document.createElement("tr");
 
             row.innerHTML = `
@@ -25,7 +25,7 @@ function searchEmployee(event) {
             `;
 
             tbody.appendChild(row);
-            table.style.display = "table"; // show table
+            table.style.display = "table"; 
         })
         .catch(err => {
             alert("Employee not found!");

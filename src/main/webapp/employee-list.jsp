@@ -42,8 +42,7 @@
 	</div>
 
 	<script>
-   const contextPath = "<%=request.getContextPath()%>
-		";
+   const contextPath = "<%=request.getContextPath()%>";
 	</script>
 	<script src="js/employee-list.js"></script>
 

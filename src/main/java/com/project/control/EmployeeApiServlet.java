@@ -22,7 +22,6 @@ public class EmployeeApiServlet extends HttpServlet {
         super.init();
         try {
             dao = new EmployeeDao();
-            System.out.println("EmployeeDao initialized successfully.");
         } catch (ClassNotFoundException e) {
             throw new ServletException("MySQL Driver not found.", e);
         }
@@ -32,7 +31,6 @@ public class EmployeeApiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         String pathInfo = request.getPathInfo();
-        System.out.println("doGet called, pathInfo=" + pathInfo);
 
         try (PrintWriter out = response.getWriter()) {
             if (pathInfo == null || pathInfo.equals("/")) {
@@ -59,7 +57,6 @@ public class EmployeeApiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         Employee e = gson.fromJson(request.getReader(), Employee.class);
-        System.out.println("doPost called, Employee=" + e);
 
         try {
             boolean result = dao.insertEmployee(e);
@@ -81,11 +78,9 @@ public class EmployeeApiServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         String pathInfo = request.getPathInfo();
-        System.out.println("doput pathinfo"+ pathInfo);
         int id = Integer.parseInt(pathInfo.substring(1));
         Employee e = gson.fromJson(request.getReader(), Employee.class);
         e.setId(id);
-        System.out.println("doPut called, Employee=" + e);
 
         try {
             boolean result = dao.updateEmployee(e);
@@ -107,7 +102,6 @@ public class EmployeeApiServlet extends HttpServlet {
         response.setContentType("application/json");
         String pathInfo = request.getPathInfo();
         int id = Integer.parseInt(pathInfo.substring(1));
-        System.out.println("doDelete called with id=" + id);
 
         try {
             boolean result = dao.deleteEmployee(id);

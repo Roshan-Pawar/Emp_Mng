@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* Center the dashboard content */
 body {
     margin: 0;
     height: 100vh;
@@ -12,13 +11,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Heading style */
 h1 {
     margin-bottom: 30px;
     color: #333;
 }
 
-/* Buttons style */
 button {
     padding: 10px 20px;
     margin: 10px;

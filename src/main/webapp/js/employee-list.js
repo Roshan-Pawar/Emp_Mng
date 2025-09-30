@@ -2,58 +2,6 @@
 let currentEditId = null;
 
 // Load all employees
- /*function loadEmployees() {
-    fetch(contextPath + "/api/employees")
-    .then(res => res.json())
-    .then(list => {
-        console.log("Fetched employees:", list);
-        const tbody = document.getElementById("employeeTableBody");
-        tbody.innerHTML = "";
-
-        list.forEach(emp => {
-            let row = document.createElement("tr");
-			
-            let currId = emp.id
-            
-            let idCell = document.createElement("td");
-            idCell.textContent = emp.id;
-            row.appendChild(idCell);
-
-            let nameCell = document.createElement("td");
-            nameCell.textContent = emp.name;
-            row.appendChild(nameCell);
-
-            let deptCell = document.createElement("td");
-            deptCell.textContent = emp.department;
-            row.appendChild(deptCell);
-
-            let salaryCell = document.createElement("td");
-            salaryCell.textContent = emp.salary;
-            row.appendChild(salaryCell);
-
-            let actionCell = document.createElement("td");
-            //actionCell.innerHTML = `<button onclick="showEditModal(${currId})">Edit</button>
-              //                      <button onclick="deleteEmployee(${currId})">Delete</button>`;
-            
-              let editBtn = document.createElement("button");
-			editBtn.textContent = "Edit";
-			editBtn.addEventListener("click", () => showEditModal(currId));
-
-			let deleteBtn = document.createElement("button");
-			deleteBtn.textContent = "Delete";
-			deleteBtn.addEventListener("click", () => deleteEmployee(currId));
-
-			actionCell.appendChild(editBtn);
-			actionCell.appendChild(deleteBtn)
-              
-            row.appendChild(actionCell);
-
-            tbody.appendChild(row);
-        });
-    })
-    .catch(err => console.error("Fetch error:", err));
-} */
-
 function loadEmployees() {
     fetch(contextPath + "/api/employees")
         .then(res => {
@@ -64,10 +12,9 @@ function loadEmployees() {
         })
         .then(list => {
             const tbody = document.getElementById("employeeTableBody");
-            tbody.innerHTML = ""; // clear previous rows
+            tbody.innerHTML = "";
 
             if (!list || list.length === 0) {
-                // Show "No employees found" row
                 let row = document.createElement("tr");
                 row.innerHTML = `<td colspan="5" style="text-align:center;">No employees found</td>`;
                 tbody.appendChild(row);
