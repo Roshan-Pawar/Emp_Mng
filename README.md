@@ -7,7 +7,7 @@
 1. Clone the repository in Eclipse (clone git repository) tab.
   
 2. Add Apache Tomcat server v9.0 in the same workspace
-  > download from here <a href="https://drive.google.com/drive/folders/1XgtbNmS-LeKSyqcPAXlV4GM7p3LcCocH?usp=sharing">Apache Tomcat server v9.0</a>.  
+  > download from here <a href="https://drive.google.com/drive/folders/1d3Z7PGqJHsYd9YLQ7JUmF3b265kHu2ep?usp=drive_link">Apache Tomcat server v9.0</a>.  
 
 3.Change user & pass in EmployeeDao.java (default is root) and perform following queries.  
   `CREATE DATABASE roshan_verto;`  
